@@ -1,6 +1,7 @@
 package com.example.demo;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RestController;
 import reactor.core.publisher.Flux;
@@ -15,7 +16,7 @@ public class Controller {
     @Autowired
     ReactiveCommentsReository commentsReository;
 
-    @PutMapping("/firstComments")
+    @GetMapping("/firstComments")
     public Flux<String> allComments() {
         return blogpostReository.findAll().flatMap(post -> {
             String first = commentsReository.findComments(post.getId()).blockFirst();
